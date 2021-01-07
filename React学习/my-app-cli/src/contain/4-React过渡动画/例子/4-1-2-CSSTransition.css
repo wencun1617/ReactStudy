@@ -1,0 +1,26 @@
+.card-enter, .card-appear {
+  /* 设置元素的不透明度级别 */
+  opacity: 0;
+  /* 旋转元素 */
+  /* scale: 定义2D缩放转换 
+  单一数值(缩放系数): 设置比1小的数值使该元素缩小*/
+  transform: scale(.2);
+}
+
+.card-enter-active, .card-appear-active {
+  opacity: 1;
+  transform: scale(1);
+  /* transition 设置元素的过渡效果  property(CSS属性name) duration(指定多少秒/毫秒才能完成)
+  不透明度和旋转 如果发生变化会有 x秒的过渡效果*/
+  transition: opacity 5000ms, transform 5000ms;
+}
+
+.card-exit {
+  opacity: 1;
+}
+
+.card-exit-active {
+  opacity: 0;
+  transform: scale(.2);
+  transition: opacity 5000ms, transform 5000ms;
+}

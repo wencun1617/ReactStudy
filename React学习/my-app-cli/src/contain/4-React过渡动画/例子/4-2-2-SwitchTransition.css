@@ -1,0 +1,26 @@
+.btn-enter {
+  /* css3中所有变形方法都属于transform属性,so,所有关于变形的方法前面都要加上 transfrom: 以表示变形处理*/
+  /* translate:(x,y)*/
+      /*  x 表示元素在水平方向(x轴)的移动距离,单位px,em,百分百
+          x 为正  ---> 元素在水平方向上向右移动
+          x 为负  ---> 元素在水平方向上向左移动*/
+  transform: translate(100%, 0);
+  opacity: 0;
+}
+
+.btn-enter-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.btn-exit {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.btn-exit-active {
+  transform: translate(-100%, 0);
+  opacity: 0;
+  transition: all 500ms;
+}

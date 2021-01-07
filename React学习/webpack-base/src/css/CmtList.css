@@ -1,0 +1,16 @@
+ /* 直接导入css层叠样式表,默认在全局,整个项目都生效(样式表默认没有独立作用域)
+ 需在 webpack.config.js配置css启用模块化 CmtListobj 不再是空对象,而是有具体对象了
+ 且css 模块化,只针对 类选择器 和 id选择器生效(CmtListobj里有对应的属性)
+ 但不会将标签选择器模块化 
+:local包裹的类名,是被模块化的类名,默认
+:global包裹的类名,是全局生效的,不会被模块化*/
+.title {
+  color: red;
+  font-style: 24px;
+  text-align: center;
+}
+
+/* 全局生效,不会被模块化 */
+:global(.test) {
+  font-style: italic;
+}

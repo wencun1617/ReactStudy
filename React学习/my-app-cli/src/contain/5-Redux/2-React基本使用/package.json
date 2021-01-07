@@ -1,0 +1,13 @@
+{
+  "name": "wencun",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wencunou",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.0.5"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <a href="/home">home</a>
+    <a href="/about">about</a>
+    <div class="router-view"></div>
+
+    <!-- HTML5的History -->
+      <!-- history接口是HTML5新增的, 它有l六种模式改变URL而不刷新页面： -->
+        <!-- replaceState：替换原来的路径； -->
+        <!-- pushState：使用新的路径； -->
+        <!-- popState：路径的回退； -->
+        <!-- go：向前或向后改变路径； -->
+        <!-- forword：向前改变路径； -->
+        <!-- back：向后改变路径； -->
+  </div>
+  
+  <script>
+    // 1.获取router-view
+    const routerViewEl = document.querySelector(".router-view");
+  
+    // 2.监听所有的a元素
+    const aEls = document.getElementsByTagName("a");
+    console.log("所有的a标签",aEls)
+    for (let aEl of aEls) {
+      aEl.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const href = aEl.getAttribute("href") // 便是获取到a元素的href属性
+
+        //#region getAttribute() style 介绍introduce
+        // aEl此时便是 a元素(/标签)
+
+        //getAttribute()
+          // getAttribute()是HTML DOM 的一个方法,用以获取HTML 元素的属性(eg: id,name,type以及其他自定义属性)
+          // 同理setAttribute() removeAttribute() 都是对HTML元素属性进行操作
+        
+        //style
+          // style是HTML DOM 的一个关于样式的对象, style对象的属性(eg:backgroung,color..)用以设置元素的样式
+          // 如若是内联样式(直接写在标签里面的style),也可以直接使用getAttribute()来获取其属性,但只能获取到style, 无法 设置style里具体属性的值
+        //#endregion
+        
+        console.log(href);
+        history.pushState({}, "", href);
+        historyChange();
+      })
+    }
+  
+    // 3.监听popstate和go操作
+    window.addEventListener("popstate", historyChange);
+    window.addEventListener("go", historyChange);
+  
+    // 4.执行设置页面操作
+    function historyChange() {
+      console.log("location",location)
+      switch(location.pathname) {
+        case "/home":
+          routerViewEl.innerHTML = "home";
+          break;
+        case "/about":
+          routerViewEl.innerHTML = "about";
+          break;
+        default:
+          routerViewEl.innerHTML = "default";
+      }
+    }
+  
+  </script>
+  
+</body>
+</html>
+
+<!-- React Router的版本4开始，路由不再集中在一个包中进行管理了 -->
+  <!-- react-router是router的核心部分代码 -->
+  <!-- react-router-dom是用于浏览器的 -->
+  <!-- react-router-native是用于原生应用的 -->
+
+<!-- 目前我们使用最新的React Router版本是v5的版本(实际上v4的版本和v5的版本差异并不大) -->
+<!-- 安装react-router-dom会自动帮助我们安装react-router的依赖 -->

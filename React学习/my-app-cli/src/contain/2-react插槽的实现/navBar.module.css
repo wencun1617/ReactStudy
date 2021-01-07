@@ -1,0 +1,16 @@
+.navBar {
+  margin-top: 60px;
+  display: flex;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+}
+.navBar .itemLeft, .navBar .itemRight {
+  width: 80px;
+  background: purple;
+}
+
+.navBar .itemCenter {
+  flex: 1;
+  background: gray;
+}

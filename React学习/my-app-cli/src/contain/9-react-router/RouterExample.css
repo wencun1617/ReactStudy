@@ -1,0 +1,14 @@
+/* 默认的activeClassName：
+事实上在默认匹配成功时，NavLink就会添加上一个动态的active class；
+所以我们也可以直接编写样式 */
+a.active {
+  font-size: 24px;
+}
+
+/* 如果担心这个class在其他地方被使用了，出现样式的层叠，也可以自定义class */
+/* about */
+.link-active {
+  color:purple;
+  font-size: 20px;
+
+}
