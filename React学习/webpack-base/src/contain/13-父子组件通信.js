@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import ReacctDOM from 'react-dom'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 // 父组件通过 属性 = 值的形式来传递给子组件数据

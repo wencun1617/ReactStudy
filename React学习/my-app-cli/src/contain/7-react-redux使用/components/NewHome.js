@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import {addAction} from '../store/actionCreators'; // 函数, 接收实参后返回 store.dispatch的对象参数
-// import connect from '../store/connect'   // connect 函数
+// import connect from '../store/connect'   //自定义 connect 函数
 
 // 将之前使用的connect函数，换成react-redux的connect函数；
 import { connect } from "react-redux";

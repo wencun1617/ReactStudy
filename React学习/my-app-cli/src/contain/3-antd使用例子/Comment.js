@@ -19,7 +19,7 @@ class Comment extends PureComponent {
         {
           this.state.commentList.map((item, index) => {
             // key:对性能优化 comment: 传给子组件的数据 index: ????
-            return <CommentListItem key={item.id} comment={item} index={index} removeItem={e => this.removeItem(index)}/>
+            return <CommentListItem key={item.id} comment={item} index={index} removeItem={() => this.removeItem(index)}/>
           })
         }
         {/* 子传父 ---> 让父组件给子组件传递一个回调函数, 在子组件内中调用这个函数即可 */}
@@ -45,7 +45,7 @@ class Comment extends PureComponent {
 
   removeItem(index) {
     const newCommentList = [...this.state.commentList];
-    newCommentList.splice(index, 1);
+    newCommentList.splice(index, 1); // splice 会改变原始数组
     this.setState({
       commentList: newCommentList
     })

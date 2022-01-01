@@ -28,8 +28,6 @@ import CmtList from '@/components/评论例子/CmtList'
 
 //#endregion
 
-
-
 let mydiv = <div>
   温存
   <hr/>
@@ -39,3 +37,22 @@ let mydiv = <div>
 //使用render函数渲染
 let divApp = document.getElementById('app')
 ReactDOM.render(mydiv,divApp)
+
+
+// 调用子元素回调 numTimes 次，来重复生成组件
+function Repeat(props) {
+  let items = [];
+  for (let i = 0; i < props.numTimes; i++) {
+    items.push(props.children(i));
+  }
+  return <div>{items}</div>;
+}
+
+function ListOfTenThings() {
+  return (
+    <Repeat numTimes={10}>
+      {/* 相当于传props, 只不过是React 帮忙变成 props的children传过去 */}
+      {(index) => <div key={index}>This is item {index} in the list</div>}
+    </Repeat>
+  );
+}

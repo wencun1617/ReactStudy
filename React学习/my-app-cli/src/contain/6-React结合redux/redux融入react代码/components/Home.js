@@ -20,8 +20,14 @@ class Home extends PureComponent {
 
   increment() {
     // 调用传过来的函数, addNumber
-    // 会回到高阶组件去执行(在传递给WrappedComponent参数那里),便是通过action(store.dispatch派发action) 来修改state
-    // 之后高阶组件返回的class组件里便会进行相应的操作, 最后更改完的新props便会再传进来
+    
+    // const mapDispatchToProps = dispatch => {
+    //   return {
+    //     addNumber: function(number) {
+    //       dispatch(addAction(number));
+    //     }
+    //   }
+    // }
     this.props.addNumber(1)
   }
 
@@ -33,7 +39,9 @@ class Home extends PureComponent {
 // 在home和props文件中,按照需要的state、dispatch来进行映射
 // 有了connect函数,只需要关心从state和dispatch中映射自己需要的状态和行为即可
 
-// 函数, 根据 实参store.getState() 进而得到希望使用的 state属性, 再以对象形式返回
+// state 形参
+// 函数, 根据 实参store.getState() 
+// 进而得到希望使用的 state属性(state.counter), 再以对象形式返回
 // [mapStateToProps：用于将state映射到一个对象中，对象中包含我们需要的属性]
 const mapStateToProps = state => {
   return {

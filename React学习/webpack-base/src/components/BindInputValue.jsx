@@ -36,9 +36,9 @@ class Example extends React.Component {
     //#endregion
 
     // 二: 使用ref获取DOM元素的引用
-    // vue 里 ref    this.#refs
+    // vue 里 ref    this.$refs
     // react 里 ref  this.refs
-    console.log(this.refs.txt)
+    console.log(this.refs.txt.value)
     
     this.setState({
       tip: this.refs.txt.value

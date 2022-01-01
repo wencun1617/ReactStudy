@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+// import '@/contain/11-评论例子'
 // import '@/contain/12-绑定文本框的值'
 // import '@/contain/13-父子组件通信'
 // import '@/contain/14-非父子组件的通信'

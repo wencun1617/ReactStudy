@@ -18,7 +18,7 @@ import ReactDOM from 'react-dom'
 // 高阶组件的调用过程类似于这样
 // const EnhancedComponent = higherOrderComponent(WrappedComponent);
 
-// 高阶函数的编写过程类似于这样
+// 高阶组件的编写过程类似于这样
 function higherOrderComponent(WrapperComponent) {
 
   //#region  ES6中，类表达式中类名是可以省略的

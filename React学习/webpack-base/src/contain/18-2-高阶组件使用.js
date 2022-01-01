@@ -1,5 +1,5 @@
-import React, { PureComponent,createContext } from 'react';
-import ReactDOM from 'react-dom'
+import React, { PureComponent, createContext } from "react";
+import ReactDOM from "react-dom";
 
 // 高阶组件的使用
 
@@ -29,43 +29,46 @@ import ReactDOM from 'react-dom'
 function enhanceProps(WrapperCpn, otherProps) {
   return (
     // props 便是 传给 EnhanceHeader的props  {name: "aaa",age: 18}     {test: "test", nickname: "why", level: 90}(下面的利用高阶组件来共享Context)
-    props => {
-      console.log("props增强",props)
-      //HOC 透传（pass through）所有 props({test: "test", nickname: "why", level: 90}) 到其包裹的组件 
+    
+    // 
+    (props) => {
+      //HOC 透传（pass through）所有 props({test: "test", nickname: "why", level: 90}) 到其包裹的组件
       // otherProps ---> 增强props
-      return <WrapperCpn {...props} {...otherProps} />
+      return <WrapperCpn {...props} {...otherProps} />;
     }
-  )
- }
- 
+  );
+}
+
 // const EnhanceHeader = enhanceProps(Header, {height: 1.88})
 
 //#endregion
 
-
 //#region 利用高阶组件来共享Context ----> 高阶组件打结构,减少重复的代码
 const UserContext = createContext({
   nickname: "默认",
-  level: -1
-})
+  level: -1,
+});
 
 // 高阶组件打结构
 function withUser(WrapperCpn) {
-  return props => {
-    console.log('高阶组件',props) // {test: "test"}
+  // HOC 透传（pass through）所有 props 到其包裹的组件
+  return (props) => {
+
+    // UserHeader   --> props     {test:"test"}
+    // UserFooter   --> props     {}
 
     return (
       <UserContext.Consumer>
         {
-          // Provider提供的参数value {nickname: "why", level: 90} 
+          // Provider提供的参数value {nickname: "why", level: 90}
           // 父组件通过 props传进来的参数 test = 'test' --->   <UserHeader test = 'test'/>
-          value => {
-            return <WrapperCpn {...props} {...value}/>
+          (value) => {
+            return <WrapperCpn {...props} {...value} />;
           }
         }
       </UserContext.Consumer>
-    )
-  }
+    );
+  };
 }
 
 //#region 没用高阶组件较麻烦,重复的结构代码
@@ -83,17 +86,24 @@ function withUser(WrapperCpn) {
 // }
 //#endregion
 function Header(props) {
-  const { nickname, level } = props;
-  return <h2>Header {"昵称:" + nickname + "等级:" + level}</h2>
+  // props --> {test: 'test', nickname: 'kkk', level: 90, height: 1.88}
+  const { nickname, level, test, height } = props;
+  return (
+    <h2>
+      Header{" "}
+      {`昵称:${nickname}  等级:${level}  tes:${test}  heught:- ${height}`}
+    </h2>
+  );
 }
 
 function Footer(props) {
+  // props ----> {nickname: 'kkk', level: 90}
   const { nickname, level } = props;
-  return <h2>Footer {"昵称:" + nickname + "等级:" + level}</h2>
+  return <h2>Footer {"昵称:" + nickname + "等级:" + level}</h2>;
 }
 
 // props增强
-const EnhanceHeader = enhanceProps(Header, { height: 1.88 })
+const EnhanceHeader = enhanceProps(Header, { height: 1.88 });
 
 const UserHeader = withUser(EnhanceHeader);
 const UserFooter = withUser(Footer);
@@ -103,11 +113,11 @@ class App extends PureComponent {
     return (
       <div>
         <UserContext.Provider value={{ nickname: "kkk", level: 90 }}>
-          <UserHeader test = 'test'/>
+          <UserHeader test="test" />
           <UserFooter />
         </UserContext.Provider>
       </div>
-    )
+    );
   }
 }
 //#endregion
@@ -121,11 +131,11 @@ class App extends PureComponent {
 //   return <h2>LoginPage</h2>
 // }
 
-// function CartPage() {
-//   return <h2>CartPage</h2>
+// function CartPage(props) {
+//   return <h2>CartPage ---- {props.isLogin.toString()}</h2>
 // }
 
-// 高阶组件判断渲染
+// // 高阶组件判断渲染
 // function loginAuth(Page) {
 
 //   // props 为 {isLogin: true}
@@ -235,4 +245,4 @@ class App extends PureComponent {
 
 //#endregion
 
-ReactDOM.render(<App/>,document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById("app"));

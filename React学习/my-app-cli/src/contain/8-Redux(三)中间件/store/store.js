@@ -6,6 +6,8 @@ import {createStore,applyMiddleware,compose, combineReducers} from 'redux'
 import counterReducer from './reducer/counter'
 import homeReducer from './reducer/home'
 
+// applyMiddleware 像 vue.install
+
 //#region redux 的 combineReducers辅助函数
     // 随着应用变得复杂,需对reducer 函数进行拆分,拆分后的每一块独立负责管理state的一部分
     // combineReducers 辅助函数的作用是, 把一个 由多个不同reducer(独立分管部分state) 作为value的object,合并成一个最终的reducer函数后返回
@@ -49,6 +51,8 @@ import homeReducer from './reducer/home'
 
   
   // 通过applyMiddleware来结合多个Middleware, 返回一个enhancer
+  // applyMiddleware <==>  vue.install
+  // enhancer 增强
   const enhancer = composeEnhancers(applyMiddleware(thunkMiddleware));
 
   // 根据reducer函数创建store

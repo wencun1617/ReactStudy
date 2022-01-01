@@ -22,7 +22,7 @@ export default class TabControl extends Component {
           // 渲染jsx元素数组
           titles.map((item,index) => {
             return (
-              <div className = "tab-item" onClick = {e => this.tabItemClick(index)} key = {index}>
+              <div className = "tab-item" onClick = {() => this.tabItemClick(index)} key = {index}>
                 <span className={"title-item " + (index === currentIndex ? "active" : "")}>{item}</span>
                 {/* <span className={ ["title-item ", (index === currentIndex ? "active" : "")].join(' ')}>{item}</span> */}
               </div>
@@ -34,6 +34,7 @@ export default class TabControl extends Component {
   }
 
   tabItemClick(index) {
+    console.log(index)
     this.setState({
       currentIndex: index
     })

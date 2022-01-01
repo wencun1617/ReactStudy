@@ -32,8 +32,8 @@ serviceWorker.unregister();
 
 // create-react-app 项目名称(别包含大写字母)
 
-// <!-- vue-cli 2          vue init webpack projectName -->
-// <!-- vue-cli 3          vue create projectName -->
+// <!-- vue-cli 2          vue init webpack projectname -->
+// <!-- vue-cli 3          vue create projectname -->
 
 // package.json
 // "start": "react-scripts start",

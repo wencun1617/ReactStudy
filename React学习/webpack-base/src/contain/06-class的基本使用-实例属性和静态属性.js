@@ -10,7 +10,7 @@ console.log(p1)
 //p1.name p1.age  通过实例访问到的属性 称为实例属性
 
 Person.info = 'aaa'
-//info属性 直接挂载给了构造函数，为静态属性  _proto_.constructor
+//info属性 直接挂载给了构造函数，为静态属性  实例._proto_.constructor
 // 通过 构造函数 直接访问到的属性 , 叫做静态属性
 
 

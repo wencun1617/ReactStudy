@@ -1,6 +1,5 @@
-
-import React,{ PureComponent, createRef} from 'react'
-import ReactDOM from 'react-dom'
+import React, { PureComponent, createRef } from "react";
+import ReactDOM from "react-dom";
 
 //#region refs的使用  1.1 创建ref来获取对应的DOM 三种方式
 
@@ -9,14 +8,14 @@ import ReactDOM from 'react-dom'
 
 // 1.1 创建ref来获取对应的DOM 三种方式
 
-  //1.传入字符串
-      // 使用时通过 this.refs.传入的字符串格式 获取对应的元素
-  //2.传入一个对象
-      // 对象通过 React.createRef() 方式创建出来的
-      // 用时获取到创建的对象其中有一个current属性就是对应的元素
-  //3.传入一个函数
-      // 该函数会在DOM被挂载时进行回调，这个函数会传入一个 元素对象，自己保存
-      // 使用时，直接拿到之前保存的元素对象即可
+//1.传入字符串
+// 使用时通过 this.refs.传入的字符串格式 获取对应的元素
+//2.传入一个对象
+// 对象通过 React.createRef() 方式创建出来的
+// 用时获取到创建的对象其中有一个current属性就是对应的元素
+//3.传入一个函数
+// 该函数会在DOM被挂载时进行回调，这个函数会传入一个 元素对象，自己保存
+// 使用时，直接拿到之前保存的元素对象即可
 
 //#endregion
 
@@ -75,25 +74,26 @@ import ReactDOM from 'react-dom'
 
 //#region ref引用一个class组件对象例子
 class Counter extends PureComponent {
-  constructor() {
+  constructor(props) {
+    super(props);
     this.state = {
-      counter: 0
-    }
+      counter: 0,
+    };
   }
 
   render() {
     return (
       <div>
         <h2>当前计数: {this.state.counter}</h2>
-        <button onClick={e => this.increment()}>Counter +1</button>
+        <button onClick={(e) => this.increment()}>Counter +1</button>
       </div>
-    )
+    );
   }
 
   increment() {
     this.setState({
-      counter: this.state.counter + 1
-    })
+      counter: this.state.counter + 1,
+    });
   }
 }
 
@@ -107,22 +107,19 @@ class App extends PureComponent {
   render() {
     return (
       <div>
-        <Counter ref={this.counterRef}/>
-        <button onClick={e => this.increment()}>App +1</button>
+        <Counter ref={this.counterRef} />
+        <button onClick={(e) => this.increment()}>App +1</button>
       </div>
-    )
+    );
   }
 
   increment() {
     this.counterRef.current.increment();
     // 当 ref 属性用于自定义 class 组件时，ref 对象接收组件的挂载实例 (Counter) 作为其 current 属性
-    console.log(this.counterRef)
+    console.log(this.counterRef);
   }
 }
 
 //#endregion
 
-
-ReactDOM.render(<App/>,document.getElementById('app'))
-
-
+ReactDOM.render(<App />, document.getElementById("app"));

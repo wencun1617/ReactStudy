@@ -3,6 +3,9 @@
 function Person(name,age) {//普通的function创建一个对象
   this.name = name
   this.age = age
+  this.say = function() {
+    console.log("696969")
+  }
 }
 Person.info = '静态属性'
 

@@ -62,7 +62,7 @@ class App extends React.Component {
         一个 Provider 可以和多个消费组件有对应关系。
         多个 Provider 也可以嵌套使用，里层的会覆盖外层的数据(value 和作用域差不多意思？) */}
         {/* 当 Provider 的 value 值发生变化时，它内部的所有消费组件都会重新渲染 */}
-        <MyContext.Provider value = {{word: 'dymamic',mean: 'n.活力/动力 adj.有活力的,不断变化的,动态的'}}>
+        <MyContext.Provider value = {{word: 'dynamic',mean: 'n.活力/动力 adj.有活力的,不断变化的,动态的'}}>
           <CenterModule/>
           <h4>App组件的其他内容</h4>
         </MyContext.Provider>
