@@ -21,6 +21,10 @@ import TransmitParameter from 'contain/9-react-router/contain/2-传递参数三�
 import ReactRouterConfig from 'contain/9-react-router/contain/3-react-router-config'
 import CountHook from 'contain/10-hook/useReducer-Hook.js'
 import ContextHookExample from 'contain/10-hook/usecontext-Hook.js'
+
+import TestuseCallback from 'contain/10-hook/useCallback'
+import TestuseMemo from 'contain/10-hook/useMemo'
+import TestuseState from 'contain/10-hook/3.函数式useState更新和普通更新的区别'
 class App extends React.Component {
   
   render() {
@@ -112,7 +116,16 @@ class App extends React.Component {
         <ContextHookExample/>
         <hr/>
 
+        <h4>函数式useState更新和普通更新的区别</h4>
+        <TestuseState/>
+        <hr/>
 
+        <h4>useCallback的使用测试</h4>
+        <TestuseCallback/>
+        <hr/>
+
+        <h4>useMemo的使用测试</h4>
+        <TestuseMemo/>
       </Fragment>
     )
   }

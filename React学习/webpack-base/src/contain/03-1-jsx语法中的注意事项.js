@@ -67,3 +67,17 @@ let mydiv = <div>
 //2. 调用 render 函数渲染
 let divApp = document.getElementById('app')
 ReactDOM.render(mydiv,divApp)
+
+//#region jsx语法规则
+  /*
+    1. 定义虚拟DOM,无需引号
+    2.标签中混入js表达式(产生一个值)要用{}
+    3.样式类名的指定使用classNamet替代class, 避开关键字
+    4.内联样式，使用style={{}}的形式 (第一个{}代表混入js表达式，第二个{}代表表达式是对象)
+    5.只有一个跟标签
+    6.标签需要闭合
+    7.标签首字母
+        (1). 小写字母开头, 编译时会将该标签转为html中的同名元素，无则报错
+        (2). 大写字母开头, react去渲染对应的组件, 组件未定义时，则报错
+  */
+//#endregion

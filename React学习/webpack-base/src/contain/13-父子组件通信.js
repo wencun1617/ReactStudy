@@ -7,6 +7,12 @@ import PropTypes from 'prop-types'
 
 class ChildCpn1 extends Component {
 
+  static propTypes = {
+    word: PropTypes.string.isRequired, // 必传，且为字符串类型
+    mean: PropTypes.string,
+    age: PropTypes.number,
+  }
+
   render() {
     const {word,mean,age} = this.props
 
@@ -20,15 +26,15 @@ class ChildCpn1 extends Component {
   }
 }
 
-//参数验证propTypes
-// 出于性能考虑,仅在开发模式下进行检查
-ChildCpn1.propTypes = {
-  word: PropTypes.string,
-  mean: PropTypes.string,
-  age: PropTypes.number,
-}
+// 对标签属性进行类型，必要性的限制
+// 相当于类上的静态属性
+// ChildCpn1.propTypes = {
+//   word: PropTypes.string.isRequired, // 必传，且为字符串类型
+//   mean: PropTypes.string,
+//   age: PropTypes.number,
+// }
 
-// defaultProps 默认值
+// defaultProps 指定标签的默认属性值
 ChildCpn1.defaultProps = {
   word: 'progress',
   mean: '进步的,逐步的,渐进的',
@@ -52,11 +58,19 @@ function CounterButton(props) {
 
 
 class App extends Component {
-  constructor() {
-    this.state = {
-      count: 0
-    }
+
+  // 构造器中是否接收props,是否传递给supper,取决于是否希望在构造器中通过this访问props
+  
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     count: 0
+  //   }
+  // }
+  state = {
+    count: 0
   }
+
   changeCount(count) {
     this.setState({
       count: this.state.count + count
@@ -73,6 +87,8 @@ class App extends Component {
     )
   }
 }
+
+// 原生js{...obj}
 
 let myDiv = <div>
   <ChildCpn1 {...words}></ChildCpn1>

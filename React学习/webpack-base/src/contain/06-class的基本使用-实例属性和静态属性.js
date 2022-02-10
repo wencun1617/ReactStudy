@@ -26,6 +26,11 @@ class Animal {
 
   //静态属性  class内部,通过 static 修饰的属性
   static info = '温存'
+
+  //#region 
+    // 1. 类中可以直接写赋值语句，则所有实例对象上都会追加该属性
+  //#endregion
+  a = 1
 }
 
 //实例

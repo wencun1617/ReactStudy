@@ -45,3 +45,15 @@ let mydiv = <div>
 //使用render函数渲染
 let divApp = document.getElementById('app')
 ReactDOM.render(mydiv,divApp)
+
+//#region 
+  /*
+    1. 类组件中的render(实例方法)， 置于类(eg:Chinese)的原型对象上，供实例使用
+    2.render中的this  类的实例对象/ 类组件的实例对象
+
+    3. 执行ReactDOM.render()之后发生了什么
+        (1) React解析组件标签，搜寻相关的组件找不到就报错了
+        (2) 发现组件是使用类定义的, 随后创建该类的实例，并通过该实例调用实例原型上的render方法
+        (3) 将render返回的虚拟DOM, 转为真实DOM, 随后呈现在视图中
+  */
+//#endregion

@@ -4,7 +4,7 @@ function Person(name,age) {//普通的function创建一个对象
   this.name = name
   this.age = age
   this.say = function() {
-    console.log("696969")
+    console.log("实例方法")
   }
 }
 Person.info = '静态属性'
@@ -19,11 +19,12 @@ Person.show = () => {
 }
 
 const p1 = new Person('温存',22) 
-console.log(p1)
+console.log("实例对象",p1)
 
 p1.say() //实例方法
-Person.show() //静态方法
+// Person.show() //静态方法
 
+console.log('函数式组件原型对象',Person.prototype)
 //----------------------------------------------------------------------
 
 //创建动物类
@@ -34,14 +35,18 @@ class Animal {
     //构造器的作用: 创建类实例时，优先执行构造器中的代码
     this.name = name
     this.age = age
+    console.log(this,"类式组件构造器中的this(实例对象)")
   }
 
   static info = '静态属性'
 
-  //挂载到原型对象上的实例方法
+  //实例方法，治愈类的原型对象上
   say() {
     console.log('动物类的实例方法')
   }
+
+  // 实例上添加属性
+  yyyy = "实例上添加属性"
 
   //静态方法   _proto_.constructor
   static show() {
@@ -51,6 +56,7 @@ class Animal {
 
 //实例
 const a1 = new Animal('蜗牛',6)
-console.log(a1)
-Animal.show()
+// console.log('类式组件', Animal)
+// console.log(a1)
+// Animal.show()
 

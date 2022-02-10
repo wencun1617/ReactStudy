@@ -1,6 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+//#region 类中的实例方法中的this undefined的原因
+/*
+
+  // 1. 实例方法放在类的原型对象上，供实例使用
+  // 2. 通过类的实例调用实例方法，实例方法中的this便是该实例对象
+  
+  // 3. 由于实例方法(btnClick) 是作为onClick的回调，所以不是通过实例调用的而是直接调用
+        又由于类中的方法默认开启了严格模式，所以实例方法中的this便不为window，而是undefined
+
+    bing 生成新的函数，改变函数中的this指向
+*/
+//#endregion
+
+
+
 //jsx 事件监听
 // React 中的事件监听 两点区别
 // 1.React事件的命名采用小驼峰式
@@ -31,12 +46,7 @@ class Example extends React.Component {
   }
 
   //#region  //this ----> undefined 原因
-  //实例方法 _proto_
   // 正常DOM操作, 监听点击, 监听函数中的this其实是节点对象(eg button 对象)
-
-  // 由于 React 并不是直接渲染成真实的DOM,所编写的button只是一个语法糖, 本质上(babel转换) 是React的Element对象
-  // btnClick函数并不是主动调用,当button发生改变 React内部调用了btnClick函数
-  // 因此, 此时React给函数绑定的this,默认情况下便为 undefined
   //#endregion
 
   //解决 this --> undefined
