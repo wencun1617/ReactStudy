@@ -28,26 +28,53 @@ const changeRecommendsAction = (recommends) => ({
 
 //#endregion
 
-//redux中发送网络请求使用的action
-//定义返回一个函数的action
-// 注意: 这里不是返回一个对象了，而是一个函数;
-// 该函数在dispatch之后会被执行;
-const getHomeMultidataAction = () => {
-  // 传入dispatch不再是一个对象, 而是一个函数
-  // react 会传入  dispatch  getState
-  // 在此函数里进行异步请求
-  // dispatch函数用于我们再次派发action  --> 此时的action(new)便是对象,里面存放类型和请求过来的数据
-  // getState函数考虑到我们之后的一些操作需要依赖原来的状态，用于让我们可以获取之前的一些状态；
+//#region redux-thunk 中间件 使得action 可以是一个函数
 
-  // (此处的dispatch 和 组件里的映射行为的dispatch没有关系,不是那里传的?) 该是与redux的applyMiddleware方法和中间件(redux-thunk)有关，源码瞧一瞧
+// 同步action指action的值为Objec类型的一般对象
+// 异步action指action的值为函数， 异步action中一般都会调用同步action
+const getHomeMultidataAction = () => {
+  // 经过 redux-thunk 的中间件后
+  // 在dispatch 的 action为函数时，store会自动回调，便传入两个对应的参数
+  // dispatch函数用于我们派发action  --> 异步action中一般都会调用同步action  此时的action便是对象,里面存放类型和请求过来的数据
+  // 就像 vuex里 actions 里面最终还是 commit 相应的 mutations
+  // getState函数考虑到我们之后的一些操作需要依赖原来的状态，用于让我们可以获取之前的一些状态；
   return (dispatch, getState) => {
-    axios.get("http://123.207.32.32:8000/home/multidata").then((res) => {
+    let temp = axios.get("http://123.207.32.32:8000/home/multidata").then((res) => {
       const data = res.data.data;
+      console.log(data,"redux-thunk")
       dispatch(changeBannersAction(data.banner.list));
       dispatch(changeRecommendsAction(data.recommend.list));
     });
+    console.log("axios返回结果",temp)
   };
 };
+
+//#endregion
+
+//#region redux-promise 
+//  1.使得action 可以是一个Promise对象  
+//  2. 由 redux-promise通过 (Promise对象).then得到返回的action, 并自动进行dispatch
+
+
+// 同步action指action的值为Objec类型的一般对象
+// 异步action指action的值为函数， 异步action中一般都会调用同步action
+// const getHomeMultidataAction = async () => {
+//   // 经过 redux-thunk 的中间件后
+//   // 在dispatch 的 action为函数时，store会自动回调，便传入两个对应的参数
+//   // dispatch函数用于我们派发action  --> 异步action中一般都会调用同步action  此时的action便是对象,里面存放类型和请求过来的数据
+//   // 就像 vuex里 actions 里面最终还是 commit 相应的 mutations
+//   // getState函数考虑到我们之后的一些操作需要依赖原来的状态，用于让我们可以获取之前的一些状态；
+
+//   let res = await axios.get("http://123.207.32.32:8000/home/multidata")
+
+//   let data = res.data.data;
+
+//   console.log("redux-promise",data)
+
+//   return changeBannersAction(data.banner.list); // 被async修饰，返回的便是promise对象
+
+// };
+//#endregion
 
 export {
   addAction,

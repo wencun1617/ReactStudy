@@ -18,6 +18,7 @@ ReactDOM.render(
   // </StoreContext.Provider>,
   
   // 传入的是store属性，而不是value属性
+  // 使用Provider包裹App，目的是让App所有后代容器组件都能接收到store, 而不需要自己手动通过props传递
   <Provider store={store}> 
     <App />
   </Provider>,

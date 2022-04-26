@@ -19,18 +19,16 @@ import MidNewProfile from 'contain/8-Redux(三)中间件/components/MidNewProfil
 import Manually from 'contain/9-react-router/contain/1-手动跳转.js'
 import TransmitParameter from 'contain/9-react-router/contain/2-传递参数三种方式.js'
 import ReactRouterConfig from 'contain/9-react-router/contain/3-react-router-config'
-import CountHook from 'contain/10-hook/useReducer-Hook.js'
 import ContextHookExample from 'contain/10-hook/usecontext-Hook.js'
 
 import TestuseCallback from 'contain/10-hook/useCallback'
 import TestuseMemo from 'contain/10-hook/useMemo'
 import TestuseState from 'contain/10-hook/3.函数式useState更新和普通更新的区别'
+import Counter from 'contain/10-hook/useReduder-hook' 
+import ImmutableMap from 'contain/11-immutable/immutable-map'
 class App extends React.Component {
   
   render() {
-    let word = {
-      initialCount: 67
-    }
     return (
       <Fragment> 
         <h4 style={{textAlign: 'center'}}>父子组件通信例子</h4>
@@ -108,9 +106,6 @@ class App extends React.Component {
         </ReactRouterConfig>
         <hr/>
 
-        <h5>useReducer</h5>
-        <CountHook initialCount={word.initialCount}></CountHook>
-        <hr/>
 
         <h5>useContext</h5>
         <ContextHookExample/>
@@ -126,6 +121,15 @@ class App extends React.Component {
 
         <h4>useMemo的使用测试</h4>
         <TestuseMemo/>
+        <hr/>
+
+        <h4>useReducer的使用</h4>
+        <Counter initialCount={1617}/>
+        <hr/>
+
+        <h4>useReducer的使用</h4>
+        <ImmutableMap/>
+
       </Fragment>
     )
   }

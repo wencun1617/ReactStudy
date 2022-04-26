@@ -40,7 +40,6 @@ class MidNewHome extends PureComponent {
     //#endregion
 
     this.props.getHomeMultidata();
-    console.log(this.props.getHomeMultidata, "pppppppppppppppppppppppppp");
   }
 
   render() {
@@ -77,40 +76,53 @@ const mapStateToProps = (state) => {
   };
 };
 
-// 在connect函数返回的高阶组件render里,传实参store.dispatch后,返回一个对象
-// 返回对象里面的属性(在connect函数里解构后)便会通过props去传递给子组件, 对象的属性的值均为函数
-// 调用addNumber函数便是 --->  通过action(store.dispatch派发action) 来修改state
-// [mapDispatchToProps：用于将dispatch映射到对象中，对象中包含在组件中可能操作的函数(addNumber)；当调用该函数时，本质上其实是调用dispatch(派发对应的Action)]
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addNumber(number) {
-      // dispatch <==> store.dispatch 为函数,
-      // addAction(number) 也是函数, 接收实参后返回 store.dispatch的对象参数
-      dispatch(addAction(number));
-    },
+// // 在connect函数返回的高阶组件render里,传实参store.dispatch后,返回一个对象
+// // 返回对象里面的属性(在connect函数里解构后)便会通过props去传递给子组件, 对象的属性的值均为函数
+// // 调用addNumber函数便是 --->  通过action(store.dispatch派发action) 来修改state
+// // [mapDispatchToProps：用于将dispatch映射到对象中，对象中包含在组件中可能操作的函数(addNumber)；当调用该函数时，本质上其实是调用dispatch(派发对应的Action)]
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addNumber(number) {
+//       // dispatch <==> store.dispatch 为函数,
+//       // addAction(number) 也是函数, 接收实参后返回 store.dispatch的对象参数
+//       dispatch(addAction(number));
+//       console.log("[[[[[[")
+//     },
 
-    //#region 组件中发送网络请求使用的
-    // changeBanners(banners) {
-    //   dispatch(changeBannersAction(banners))
-    // },
-    // changeRecommends(recommends) {
-    //   dispatch(changeRecommendsAction(recommends))
-    // }
+//     //#region 组件中发送网络请求使用的
+//     // changeBanners(banners) {
+//     //   dispatch(changeBannersAction(banners))
+//     // },
+//     // changeRecommends(recommends) {
+//     //   dispatch(changeRecommendsAction(recommends))
+//     // }
 
-    //#endregion
+//     //#endregion
 
-    getHomeMultidata() {
-      
-      // 中间件的作用: 通过改变dispatch方法改变数据流, 所以使用enhancer对createstore方法进行装饰
-      // getHomeMultidataAction返回的action是个函数,且会传给这个函数一个dispatch函数和getState函数
-      // 在此函数里进行异步请求
-      // dispatch函数用于我们再次派发action  --> 此时的action(new)便是对象,里面存放类型和请求过来的数据
-      // getState函数考虑到我们之后的一些操作需要依赖原来的状态，用于让我们可以获取之前的一些状态；
+//     getHomeMultidata() {
 
-      // ...mapDispatchToProps(this.context.dispatch)
-      dispatch(getHomeMultidataAction());
-    },
-  };
+//       // 中间件的作用: 通过改变dispatch方法改变数据流, 所以使用enhancer对createstore方法进行装饰
+//       // getHomeMultidataAction返回的action是个函数,且会传给这个函数一个dispatch函数和getState函数
+//       // 在此函数里进行异步请求
+//       // dispatch函数用于我们再次派发action  --> 此时的action(new)便是对象,里面存放类型和请求过来的数据
+//       // getState函数考虑到我们之后的一些操作需要依赖原来的状态，用于让我们可以获取之前的一些状态；
+
+//       // ...mapDispatchToProps(this.context.dispatch)
+//       dispatch(getHomeMultidataAction());
+//     },
+//   };
+// };
+
+//  mapDispatchToProps 也可以是一个对象
+// 对象里的key 对应的 value 可以直接为对应的action生成器函数  --->  react-redux会默认分发(dispatch)
+
+// 之前mapDispatchToProps为函数是为了(在被回调时)拿到  store.dispatch (UI组件通过 connect 包裹上容器组件 ,在其实现的高阶组件内部回调的时候便会传入)
+// 之后在其返回的 对象key 对应的value里手动派发action
+// 手动派发action外面包裹的箭头函数来接参数是多余的，最总都是传给对应的action生成器
+// 所以在简写时直接写action生成器便可以了
+const mapDispatchToProps = {
+  addNumber: addAction,
+  getHomeMultidata: getHomeMultidataAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MidNewHome);
